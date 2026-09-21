@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Misc
+.DS_Store
+*.log
+
+# Scratch folder from previous README drafting sessions (own nested git repo, not part of this project)
+/ReadMEs/
