@@ -2,7 +2,7 @@
 
 > Document vivant. Claude Code met à jour les statuts au fur et à mesure que tu fournis les infos ou coches des cases. Ne pas éditer la structure toi-même — donne les infos en conversation, je mets ce fichier à jour.
 
-Dernière mise à jour : 2026-09-21
+Dernière mise à jour : 2026-09-22
 
 ---
 
@@ -13,6 +13,7 @@ Dernière mise à jour : 2026-09-21
 - **Repo GitHub** : public, sur le compte perso [Gabsavage](https://github.com/Gabsavage).
 - **Domaine** : gabrielsavean.xyz (déjà acheté).
 - **Case study signature #3** : polybot (pas GabsavClawd, qui reste une carte écosystème légère).
+- **Direction design** : système "monochrome broadside manifesto" choisi par Gabriel (voir `DESIGN.md`) — noir/crème pur, headline géante en grotesque condensée, mono technique pour labels/stack, zéro ombre, zéro accent couleur. Polices : équivalents gratuits Google Fonts (Big Shoulders, IBM Plex Mono, Inter) à la place des polices payantes du système de référence.
 
 ---
 
@@ -57,12 +58,17 @@ Dernière mise à jour : 2026-09-21
 - [x] Mémoire du projet sauvegardée (positionnement, contraintes, profil)
 - [x] Repo Git initialisé + repo GitHub public créé
 - [x] Infos des projets écosystème récupérées depuis tes READMEs GitHub existants (polybot, GabsavClawd, jobai-automation, tantpis-web)
+- [x] Skeleton Next.js (App Router, TS, Tailwind v4) — note : scaffoldé en Next.js 16 (dernière version stable), pas 14 comme dans le brief initial, pour rester à jour côté demo technique
+- [x] Passe design avec le skill frontend-design — système appliqué et validé visuellement (desktop + mobile), documenté dans `DESIGN.md` : hero, statut de dispo, ticker stack, grille écosystème (4 vrais projets), nav pill sticky
 - [ ] Architecture de contenu (MDX/JSON) pour les case studies, pensée pour durer sans retoucher le code
-- [ ] Skeleton Next.js 14 (App Router, TS, Tailwind, Framer Motion) + routing bilingue FR/EN
-- [ ] Passe design avec le skill frontend-design (palette, typographie, direction visuelle distincte de Tant Pis.)
+- [ ] Routing bilingue FR/EN (le sélecteur de langue n'est pas encore branché — pas de contenu EN à basculer pour l'instant)
 - [ ] Timeline interactive Paris → Lima → futur
+- [ ] Case studies Danone / WTTJ / polybot (bloqué sur les infos manquantes ci-dessus)
 - [ ] Démos/previews des projets (calibrées projet par projet)
 - [ ] Intégration contenu final, polish, déploiement Vercel
+
+### Note technique
+Le dev tourne bien (`npm run dev`, http://localhost:3000, zéro erreur console). Le typecheck et le lint automatiques ont buté sur un souci d'environnement : `node_modules` se fait synchroniser par iCloud Drive parce que le projet est dans `~/Documents` (qui a "Bureau et Documents" activé dans les réglages iCloud), et ça met le disque en contention — ton disque ne fait qu'aussi 6,5 Go de libre. Pas un problème de code, mais si les prochaines sessions restent lentes (installs, build), les deux vraies options sont : libérer de l'espace disque, ou sortir le repo du dossier synchronisé iCloud (par ex. `~/Developer/`).
 
 ---
 
