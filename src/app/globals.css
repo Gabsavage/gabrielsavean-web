@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+:root {
+  --color-ink: #000000;
+  --color-paper: #f1f0ee;
+  --color-charcoal: #252525;
+  --color-bone: #dbdad9;
+  --color-white: #ffffff;
+}
+
+@theme inline {
+  --color-ink: var(--color-ink);
+  --color-paper: var(--color-paper);
+  --color-charcoal: var(--color-charcoal);
+  --color-bone: var(--color-bone);
+  --color-white: var(--color-white);
+
+  --font-display: var(--font-big-shoulders), sans-serif;
+  --font-mono: var(--font-plex-mono), monospace;
+  --font-sans: var(--font-inter), sans-serif;
+
+  --spacing-section: 5rem;
+  --spacing-section-sm: 3rem;
+
+  --radius-pill: 32px;
+  --radius-card: 8px;
+  --radius-sm: 4px;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+/* Display type — the one loud element in the system: huge, condensed, crushed line-height, tight negative tracking. */
+.text-display {
+  font-family: var(--font-display);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  text-transform: uppercase;
+}
+
+.marquee-track {
+  animation: marquee 28s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}

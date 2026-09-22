@@ -13,6 +13,14 @@ out/
 # Misc
 .DS_Store
 *.log
+*.pem
+*.tsbuildinfo
+
+# TypeScript
+next-env.d.ts
+
+# Vercel
+.vercel
 
 # Scratch folder from previous README drafting sessions (own nested git repo, not part of this project)
 /ReadMEs/
