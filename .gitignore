@@ -24,3 +24,8 @@ next-env.d.ts
 
 # Scratch folder from previous README drafting sessions (own nested git repo, not part of this project)
 /ReadMEs/
+
+# Local agent tooling (Higgsfield CLI skills, etc.) — machine/session config, not part of the site
+/.agents/
+/.claude/
+skills-lock.json
