@@ -6,6 +6,51 @@ Dernière mise à jour : 2026-09-22
 
 ---
 
+## 🔧 Reprise de session en cours (lire en premier)
+
+Session interrompue pour un redémarrage de Claude Code (nécessaire pour charger les outils MCP Higgsfield fraîchement connectés). Tout le travail ci-dessous est en cours, pas fini — voici l'état exact.
+
+### Tâche en cours
+Donner plus de vie au site (`gabrielsavean-web`) : mécanique de scroll plus poussée + vrais visuels dans la grille écosystème, inspiré du site de référence [duties.xyz](https://www.duties.xyz/) que Gabriel a demandé de suivre fidèlement.
+
+**Décision importante pour cadrer ça** : on reprend fidèlement le *système* de duties.xyz (déjà fait — palette, typo, spacing, patterns de composants, voir `DESIGN.md` et `DESIGNDUTIES.md`) et sa *sophistication d'interaction* (mécanique de scroll), mais **pas leur contenu propre** — pas leur accroche ("BRANDS AND WEBSITES FOR BRAVE COMPANIES"), pas leur texte de bandeau, pas leurs visuels spécifiques. C'est leur propriété créative, et ça ne correspondrait à rien pour Gabriel (pas un studio de design). Tout le contenu/visuel doit être original et représenter les vrais projets de Gabriel.
+
+**Budget Higgsfield** : images uniquement pour l'instant (décision de Gabriel) — pas de vidéo (une vidéo 8s/1080p coûte ~96 des 110 crédits disponibles). Images ~1-2 crédits chacune.
+
+**Ambition scroll** : révélations au scroll + sections épinglées/parallax (pas de scroll-scrub vidéo complet, faute de budget vidéo).
+
+### Où ça bloquait
+Higgsfield CLI (`@higgsfield/cli`) refuse la génération directe sur ce plan (`only_mcp_usage_on_trial_is_available`). Solution : connecté leur serveur MCP officiel (`https://mcp.higgsfield.ai/mcp`) via `claude mcp add --transport http higgsfield https://mcp.higgsfield.ai/mcp -s user` (scope **user**, pas local — sinon invisible depuis un autre terminal). Authentifié avec succès (`claude mcp list` → `higgsfield ... ✔ Connected`). Il fallait un redémarrage de session pour que les outils MCP apparaissent côté Claude Code.
+
+**Première chose à faire dans la nouvelle session** : vérifier que des outils `mcp__higgsfield__*` sont bien disponibles (chercher avec l'outil de recherche d'outils). Si toujours absents, vérifier `claude mcp list` en bash — si "Connected", le souci est ailleurs (peut-être un redémarrage complet de l'app, pas juste une nouvelle session, est nécessaire).
+
+### État technique exact (commit `abac563`, poussé sur `main`)
+- `framer-motion` installé (pas encore utilisé dans le code)
+- `src/content/ecosystem.ts` : ajout des champs `image`/`imageAlt` sur chaque projet + ajout de l'entrée **PVP Blackjack** (oubliée dans la première passe)
+- Captures d'écran réelles (via Playwright) déjà prises et committées :
+  - `public/ecosystem/tantpis.png` (tantpis-web.vercel.app)
+  - `public/ecosystem/pvp-blackjack.png` (pvp-blackjack.vercel.app)
+- `DESIGNDUTIES.md` ajouté (extrait de style que Gabriel a fourni) — à utiliser comme référence système, pas comme source de contenu
+
+### Ce qui reste à faire, dans l'ordre
+1. **Générer 3 images via Higgsfield MCP** (illustrations abstraites monochromes, pas de faux screenshots — voir prompts ci-dessous), sauvegarder dans `public/ecosystem/` :
+   - `polybot.png`
+   - `jobai.png`
+   - `gabsavclawd.png`
+2. **Mettre à jour `ProjectGrid.tsx`** pour afficher `next/image` avec le champ `image` de chaque projet au lieu du bloc plat `bg-bone` actuel
+3. **Construire la mécanique de scroll** (avec `framer-motion`, déjà installé) :
+   - Hero épinglé (`position: sticky` + `useScroll`/`useTransform`) qui se transforme/s'efface pendant que la section suivante apparaît
+   - Parallax léger sur les images de la grille écosystème (une seule idée de mouvement appliquée uniformément, pas un effet différent par carte)
+4. **Tester visuellement** (captures desktop + mobile via Playwright, comme la première passe design) avant de committer
+5. **Committer et pousser** avec un message clair
+
+### Prompts Higgsfield à utiliser (modèle `gpt_image_2_5`, `--aspect_ratio 4:5 --resolution 2k`)
+- **polybot** : `Abstract editorial illustration of a financial order book depth chart and candlestick data streams, minimal black ink line art on warm cream paper background, monochrome, technical precision, no color, high contrast, generous negative space`
+- **GabsavClawd** : `Abstract editorial illustration representing an autonomous scouting agent analyzing signals, radar and network node motif, minimal black ink line art on warm cream paper background, monochrome, technical precision, no color`
+- **JobAI** : `Abstract editorial illustration representing an automated pipeline workflow, connected nodes and document icons, minimal black ink line art on warm cream paper background, monochrome, technical precision, no color`
+
+---
+
 ## Décisions déjà tranchées
 
 - **Langue** : bilingue FR/EN, français par défaut, sélecteur de langue visible.
